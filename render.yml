@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: auth-service
+    runtime: java
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromSecret: MONGODB_URI
+      - key: MONGODB_DATABASE
+        fromSecret: MONGODB_DATABASE
+      - key: MONGODB_AUTH_DB
+        fromSecret: MONGODB_AUTH_DB
+      - key: CLOUDINARY_CLOUD_NAME
+        fromSecret: CLOUDINARY_CLOUD_NAME
+      - key: CLOUDINARY_API_KEY
+        fromSecret: CLOUDINARY_API_KEY
+      - key: CLOUDINARY_API_SECRET
+        fromSecret: CLOUDINARY_API_SECRET
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+    healthCheckPath: /actuator/health
+    plan: free

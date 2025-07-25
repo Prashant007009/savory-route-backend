@@ -60,6 +60,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtResponse login(LoginRequest request) {
+    	long time = System.currentTimeMillis();
     	String identifier = request.getIdentifier();
         Optional<AuthModel> userOpt;
 
@@ -81,7 +82,8 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtUtil.generateToken(user);
-        return new JwtResponse(token);
+        System.out.println(System.currentTimeMillis()-time);        
+        return new JwtResponse(token);  
     }
 
     @Override
